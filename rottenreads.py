@@ -3,6 +3,9 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 import os
 
 app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+print(os.environ['APP_SETTINGS'])
+
 
 @app.route('/', methods=['GET','POST'])
 def home():
