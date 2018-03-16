@@ -9,6 +9,13 @@
   <h1>Explore Books</h1>
   <p>Click on book to read and write reviews</p> 
 </div>
+<div>
+	<h1></h1>
+	{% for book in books %}
+      <p>{{book.title}}</p>
+      <p>{{book.description}}</p>
+    {% endfor %}
 
+</div>
 </body>
 </html>

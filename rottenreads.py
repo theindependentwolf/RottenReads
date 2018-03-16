@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app) 
 
 
-from models import Book, Review, User
+from models import *
 
 @app.route('/', methods=['GET','POST'])
 def home():
@@ -38,12 +38,13 @@ def login():
 			return render_template('login.html')
 
 
-@app.route('/explore', methods=['GET','POST'])
+@app.route('/explore', methods=['GET'])
 def explore():
 	"""
 	Books from everyone
 	"""	
-	return render_template('explore.html')
+	books = Book.query.all()
+	return render_template('explore.html', books = books)
 
 
 @app.route('/mybooks', methods=['GET','POST'])

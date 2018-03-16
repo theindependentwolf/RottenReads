@@ -11,7 +11,6 @@ class Book(db.Model):
     description = db.Column(db.String())
     added_by = db.Column(db.String(), nullable=False)
     added_date = db.Column(db.DateTime(), nullable=False)
-    result_all = db.Column(JSON)
 
 
     def __init__(self, ISBN, title, description, added_by, added_date, result_all):
@@ -20,7 +19,6 @@ class Book(db.Model):
         self.description = description
         self.added_by = added_by
         self.added_date = added_date
-        self.result_all = result_all
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -50,7 +48,6 @@ class Review(db.Model):
     comment = db.Column(db.String())
     added_by = db.Column(db.String(), nullable=False)
     added_date = db.Column(db.DateTime(), nullable=False)
-    result_all = db.Column(JSON)
 
 
     def __init__(self, ISBN, star, comment, added_by, added_date, result_all):
@@ -59,7 +56,6 @@ class Review(db.Model):
         self.description = description
         self.added_by = added_by
         self.added_date = added_date
-        self.result_all = result_all
 
 
     def __repr__(self):
