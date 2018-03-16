@@ -1,11 +1,15 @@
 from flask import Flask
 from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-#app.config.from_object(os.environ['APP_SETTINGS']) 
-print(os.environ['APP_SETTINGS'])
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app) 
 
+
+from models import Book, Review, User
 
 @app.route('/', methods=['GET','POST'])
 def home():
