@@ -1,43 +1,3 @@
-<!--<html>
-<body>
-<div>
-	<nav class="navbar navbar-expand-sm bg-dark ">
-
-	   <a class="navbar-brand text-warning" href="{{ url_for('home') }}">Rotten Reads</a>
-
-
-
-	  <ul class="navbar-nav navbar-nav flex-row ml-md-auto d-none d-md-flex">
-	  	{% if session['username'] %}
-	  	<li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('mybooks') }}">{{ session['username'] }}</a>
-	    </li>
-	    {% endif %}
-	    <li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('logout') }}">Explore</a>
-	    </li>
-	    {% if session['username'] %}
-	    <li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('logout') }}">My Books</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('logout') }}">My Reviews</a>
-	    </li>	    
-	    <li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('logout') }}">Logout</a>
-	    </li>
-	    {% endif %}
-	    {% if not session['username'] %}
-	    <li class="nav-item">
-	      <a class="nav-link text-warning" href="{{ url_for('login') }}">Login</a>
-	    </li>
-	    {% endif %}
-	  </ul>
-
-	</nav>
-</div>
-</body>
-</html>-->
 <html>
 <body>
     <!-- Navigation -->
@@ -48,6 +8,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+          	{% if session['username'] %}
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="/mybooks">{{ session['username'] }}</a>
+            </li>
+            {% endif %}          	
             <li class="nav-item">
               <a class="nav-link text-warning" href="/books">Explore</a>
             </li>
