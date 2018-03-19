@@ -1,14 +1,39 @@
 <html>
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>  
 </head>
 <body>
-<div class="jumbotron text-center">
-  <h1>My Reviews</h1>
-  <p>Look at all your reviews here</p> 
-</div>
+	{% include 'menu.html' %}
+	<div class="jumbotron jumbotron-fluid text-center text-warning bg-dark jumbo-heading">
+	  <h1>My Reviews</h1>
+	  <p>Look at all your reviews here.</p> 
+	</div>
+	<div class="container">
+	{% if not session['username'] %}
+	<p>Please login to see your reviews</p>
+	<p><a class="btn btn-danger" href="/login">Login</a></p>
+	{% else %}
+	{% for review in reviews%}
+	<p>
+  	  	 <ul class=list-group>
+  	  	 	<li class="list-group-item"><b>Title:</b> {{ review.title }}</li>
+  	  	 	<li class="list-group-item"><b>Rating:</b> {{ review.star }}</li>
+			<li class="list-group-item"><b>Review:</b> {{ review.comment }}</li>
+			<li class="list-group-item">
+            	<form action="{{ url_for('get_book', isbn=review.isbn) }}">
+	            	<button class="btn btn-lg btn-success" type="submit">
+						Go to Book
+					</button>
+				</form>
+            </li>
+        </ul>
+	</p>
+	{% endfor %}
+	{% endif %}
+	</div>
 
 </body>
 </html>

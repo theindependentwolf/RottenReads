@@ -1,32 +1,33 @@
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-<div class="jumbotron text-center">
-  Welcome {{ session['username'] }} !
+{% include 'menu.html' %}
+<div class="jumbotron jumbotron-fluid text-center text-warning bg-dark jumbo-heading">
+  Welcome {{ session['username'] }}
   <h1>Rotten Reads</h1>
   <p>Book reviews from around the world!!!</p> 
 </div>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3>Explore</h3>
-      <p>Explore books and read their reviews</p>
-      <p><button>Explore</button></p>
+      <h3 class="text-secondary">Explore</h3>
+      <p>Explore books from around the world</p>
+      <p><a class="btn btn-danger" href="/books">Explore</a></p>
     </div>
     <div class="col-sm-4">
-      <h3>My Books</h3>
-      <p>Add new books or look at your existing books.</p>
-      <p><button>My Books</button></p>
+      <h3 class="text-secondary">My Books</h3>
+      <p>Look at your existing books. Add more.</p>
+      <p><a class="btn btn-danger" href="/mybooks">My Books</a></p>
     </div>
     <div class="col-sm-4">
-      <h3>My Reviews</h3>
-      <p>Look at all the reviews you've made</p>
-      <p><button>My Reviews</button></p>
+      <h3 class="text-secondary">My Reviews</h3>
+      <p>Look at all the reviews you've made.</p>
+      <p><a class="btn btn-danger" href="/myreviews">My Reviews</a></p>
     </div>
   </div>
 </div>

@@ -1,14 +1,89 @@
 <html>
 <head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">	
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">  
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> 
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <style>
+  	input{
+  		margin-bottom: 5px;
+  	}
+
+  	.jumbo-heading{
+	padding: 154px 0 100px;
+	}
+  </style>
 </head>
-<body>
-<div class="jumbotron text-center">
-  <h1>My Books</h1>
-  <p>Look at books you've added. Add more books.</p> 
-</div>
+<body>	
+	{% include 'menu.html' %}
+	<div class="jumbotron jumbotron-fluid text-center text-warning bg-dark jumbo-heading">
+	  <h1>My Books</h1>
+	  <p>Look at all the books you've added. Add more.</p> 
+	</div>
+	<div class="container">
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    {% for message in messages %}
+		      <span class="text-info">{{ message }}</span>
+		    {% endfor %}
+		  {% endif %}
+		{% endwith %}
+
+		{% if not session['username'] %}
+
+			<p>You are not logged in. <p>
+			<p><a class="btn btn-danger" href="/login">Login</a></p>
+
+		{% else %}
+		<div>
+			<p><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addABookModal">Add a Book</button></p>
+		</div>
+		{% for book in books %}
+		  <p>
+		  	 <ul class="list-group" >
+		  	 	<li class="list-group-item"><b>ISBN:</b> {{book.isbn}}</li>
+				<li class="list-group-item"><b>Title:</b> {{book.title}}</li>
+				<li class="list-group-item"><b>Author:</b> {{book.title}}</li>
+	            <li class="list-group-item"><b>Description:</b> {{book.description}}</li>
+	            <li class="list-group-item">
+            	<form action="{{ url_for('get_book', isbn=book.isbn) }}">
+	            	<button class="btn btn-lg btn-success" type="submit">
+						Go to Book
+					</button>
+				</form>
+            	</li>
+	          </ul>
+	      </p>
+	    {% endfor %}
+
+	    {% endif %}
+	</div>
+
+	<div class="modal fade" id="addABookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Add a Book</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <form class="form-signin" action="/books" method="POST">
+	      <div class="modal-body">			
+				<input type="text" name="isbn" class="form-control" placeholder="isbn" autofocus="">				
+				<input type="text" name="title" class="form-control" placeholder="Title" autofocus="">				
+				<input type="text" name="author" class="form-control" placeholder="Author" autofocus="">				
+				<input type="text" name="description" class="form-control" placeholder="Description" autofocus="">		
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-danger">Save changes</button>
+	      </div>
+	  	  </form>
+	    </div>
+	  </div>
+	</div>
+
 
 </body>
 </html>
