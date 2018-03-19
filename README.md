@@ -24,4 +24,13 @@ Running Live on www.rottenreads.com
 
 ### Testing
 
-1. Application has undergone through User Acceptance Testing. 
+1. Application has undergone thorough User Acceptance Testing.
+2. Unit tests to be added.
+
+
+### To be Added
+
+1. Pagination
+2. Images for books
+3. Proper Authentication
+4. Search function
